@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Snake Game – Wide Screen</title>
+  <style>
+    body {
+      margin: 0;
+      background: #111;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    h2 {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 24px;
+    }
+    canvas {
+      display: block;
+      margin: 20px auto;
+      border: 3px solid #fff;
+      background: radial-gradient(circle, #333 0%, #111 100%);
+    }
+  </style>
+</head>
+<body>
+  <h2>Score: <span id="score">0</span></h2>
+  <canvas id="game" width="1200" height="800"></canvas>
+  <script>
+    const canvas = document.getElementById("game");
+    const ctx = canvas.getContext("2d");
+    const scoreDisplay = document.getElementById("score");
+
+    const gridSize = 20;
+    let snake = [
+      { x: 200, y: 200 },
+      { x: 180, y: 200 },
+      { x: 160, y: 200 }
+    ];
+    let direction = "right";
+    let score = 0;
+    let animationTick = 0;
+
+    const foodTypes = [
+      { color: "#FF3B30", points: 1 },
+      { color: "#34C759", points: 2 },
+      { color: "#FF9500", points: 3 },
+      { color: "#007AFF", points: 5 }
+    ];
+    let food = generateFood();
+
+    function drawHead(x, y) {
+      ctx.fillStyle = "#FF4500";
+      ctx.beginPath();
+      ctx.ellipse(x + gridSize / 2, y + gridSize / 2, gridSize / 2.2, gridSize / 3, 0, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+
+    function drawSegment(x, y, index) {
+      const waveOffset = Math.sin((animationTick + index * 4) * 0.15) * 2;
+      ctx.fillStyle = `hsl(${index * 15 + 100}, 70%, 50%)`;
+      ctx.beginPath();
+      ctx.arc(x + gridSize / 2, y + gridSize / 2 + waveOffset, gridSize / 2.4, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+
+    function drawSnake() {
+      drawHead(snake[0].x, snake[0].y);
+      for (let i = 1; i < snake.length; i++) {
+        drawSegment(snake[i].x, snake[i].y, i);
+      }
+    }
+
+    function drawFood() {
+      const bounce = Math.sin(animationTick * 0.3) * 3;
+      ctx.fillStyle = food.color;
+      ctx.beginPath();
+      ctx.arc(food.x + gridSize / 2, food.y + gridSize / 2 + bounce, gridSize / 2, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+
+    function moveSnake() {
+      const head = { ...snake[0] };
+      if (direction === "right") head.x += gridSize;
+      else if (direction === "left") head.x -= gridSize;
+      else if (direction === "up") head.y -= gridSize;
+      else if (direction === "down") head.y += gridSize;
+
+      head.x = (head.x + canvas.width) % canvas.width;
+      head.y = (head.y + canvas.height) % canvas.height;
+
+      if (snake.some(seg => seg.x === head.x && seg.y === head.y)) {
+        alert("Game Over! Score: " + score);
+        resetGame();
+        return;
+      }
+
+      snake.unshift(head);
+
+      if (head.x === food.x && head.y === food.y) {
+        score += food.points;
+        scoreDisplay.textContent = score;
+        food = generateFood();
+      } else {
+        snake.pop();
+      }
+    }
+
+    function generateFood() {
+      let newFood;
+      do {
+        newFood = {
+          x: Math.floor(Math.random() * canvas.width / gridSize) * gridSize,
+          y: Math.floor(Math.random() * canvas.height / gridSize) * gridSize,
+          ...foodTypes[Math.floor(Math.random() * foodTypes.length)]
+        };
+      } while (snake.some(seg => seg.x === newFood.x && seg.y === newFood.y));
+      return newFood;
+    }
+
+    function resetGame() {
+      snake = [
+        { x: 200, y: 200 },
+        { x: 180, y: 200 },
+        { x: 160, y: 200 }
+      ];
+      direction = "right";
+      score = 0;
+      scoreDisplay.textContent = score;
+      food = generateFood();
+    }
+
+    function gameLoop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      moveSnake();
+      drawSnake();
+      drawFood();
+      animationTick++;
+    }
+
+    setInterval(gameLoop, 100);
+    placeFood();
+
+    document.addEventListener("keydown", e => {
+      if (e.key === "ArrowUp" && direction !== "down") direction = "up";
+      if (e.key === "ArrowDown" && direction !== "up") direction = "down";
+      if (e.key === "ArrowLeft" && direction !== "right") direction = "left";
+      if (e.key === "ArrowRight" && direction !== "left") direction = "right";
+    });
+
+    function placeFood() {
+      food = generateFood();
+    }
+  </script>
+</body>
+</html>
+
