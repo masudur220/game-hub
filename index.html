@@ -40,6 +40,16 @@
       transform: scale(1.05);
       background-color: #3a3a5d;
     }
+    .game-card.disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .game-card.disabled a {
+      background-color: #555;
+      color: #ccc;
+      cursor: default;
+   }
+
     .game-card h2 {
       font-size: 1.5rem;
       margin: 10px 0;
@@ -75,79 +85,85 @@
   </header>
 
   <section class="game-list">
-<div class="game-card">
-  <h2>Snake Classic</h2>
-  <p>Guide the snake, eat the apples, and avoid hitting the walls—or yourself!</p>
-  <a href="./snake/index.html">Play Now</a>
-</div>
-
     <div class="game-card">
+      <h2>Snake Classic</h2>
+      <p>Guide the snake, eat the apples, and avoid hitting the walls—or yourself!</p>
+      <a href="./snake/index.html">Play Now</a>
+    </div>
+    <div class="game-card">
+      <h2>Air-Fight Assault</h2>
+      <p>Command your jet through intense dogfights and dodge enemy fire in this high-flying arcade shooter.</p>
+      <a href="./air-fight/index.html">Play Now</a>
+    </div>
+
+
+    <div class="game-card disabled">
       <h2>Memory Match</h2>
       <p>Test your memory with this colorful card-flipping challenge.</p>
       <a href="memory-match.html">Play Now</a>
     </div>
-    <div class="game-card">
+    <div class="game-card disabled">
       <h2>Math Blitz</h2>
       <p>Race against the clock to solve equations and sharpen your math skills.</p>
       <a href="math-blitz.html">Play Now</a>
     </div>
-    <div class="game-card">
+    <div class="game-card disabled">
       <h2>Logic Puzzle</h2>
       <p>Challenge your brain with grid-based logic games and riddles.</p>
       <a href="logic-puzzle.html">Play Now</a>
     </div>
-    <div class="game-card">
+    <div class="game-card disabled">
       <h2>Reaction Racer</h2>
       <p>How fast can you click? A test of reflex and timing.</p>
       <a href="reaction-racer.html">Play Now</a>
     </div>
 <!-- Game list continued -->
-<div class="game-card">
+<div class="game-card disabled">
   <h2>Sudoku Master</h2>
   <p>Classic number-placement puzzle to test your logic and patience.</p>
   <a href="sudoku-master.html">Play Now</a>
 </div>
-<div class="game-card">
+<div class="game-card disabled">
   <h2>Color Catch</h2>
   <p>Tap the matching colors before time runs out. Speed is key!</p>
   <a href="color-catch.html">Play Now</a>
 </div>
-<div class="game-card">
+<div class="game-card disabled">
   <h2>Tic-Tac-Toe Pro</h2>
   <p>Play the timeless game against AI or a friend. Three in a row wins!</p>
   <a href="tic-tac-toe-pro.html">Play Now</a>
 </div>
-<div class="game-card">
+<div class="game-card disabled">
   <h2>2048 Fusion</h2>
   <p>Slide and combine tiles to reach the legendary 2048 block.</p>
   <a href="2048-fusion.html">Play Now</a>
 </div>
-<div class="game-card">
+<div class="game-card disabled">
   <h2>Word Quest</h2>
   <p>Search for hidden words in a grid and expand your vocabulary.</p>
   <a href="word-quest.html">Play Now</a>
 </div>
-<div class="game-card">
+<div class="game-card disabled">
   <h2>Flappy Sprite</h2>
   <p>Tap to fly and dodge obstacles in this pixelated side-scroller.</p>
   <a href="flappy-sprite.html">Play Now</a>
 </div>
-<div class="game-card">
+<div class="game-card disabled">
   <h2>Shape Sorter</h2>
   <p>Quickly classify falling shapes before they pile up!</p>
   <a href="shape-sorter.html">Play Now</a>
 </div>
-<div class="game-card">
+<div class="game-card disabled">
   <h2>Maze Escape</h2>
   <p>Find your way out of an ever-changing labyrinth.</p>
   <a href="maze-escape.html">Play Now</a>
 </div>
-<div class="game-card">
+<div class="game-card disabled">
   <h2>Typing Ninja</h2>
   <p>Slice through words with lightning-fast keystrokes.</p>
   <a href="typing-ninja.html">Play Now</a>
 </div>
-<div class="game-card">
+<div class="game-card disabled">
   <h2>Bouncing Ball</h2>
   <p>Keep the ball alive by bouncing it with precision and rhythm.</p>
   <a href="bouncing-ball.html">Play Now</a>
